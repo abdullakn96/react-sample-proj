@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Tools from '../components/Tools'
 import ListItem from './ListItem'
 
@@ -21,12 +21,38 @@ const itemObj = [
     }
 ]
 
+
+
+
 function List() {
+
+    const [itemArray, setItemArray] = useState(itemObj)
+
+    const handleChangeDropDown = (event) => {
+        console.log("dropdown changed")
+        console.log(event.target.value)
+        const eventValue = event.target.value
+        const newList = itemObj.filter((item) => {
+            if (eventValue === 'all') {
+                return true
+            }
+            if (eventValue === 'active') {
+                return item.isActive === true
+            }
+            if (eventValue === 'non-active') {
+                return item.isActive === false
+            }
+            return false
+
+        })
+
+        setItemArray(newList)
+    }
     return (
-        <Tools>
+        <Tools onAction={handleChangeDropDown}>
             <div className="app-list">
                 {
-                    itemObj.map((obj, index) => {
+                    itemArray.map((obj, index) => {
                         return <ListItem key={index} title={obj.title} descr={obj.descr} isActive={obj.isActive} />
                     })
                 }

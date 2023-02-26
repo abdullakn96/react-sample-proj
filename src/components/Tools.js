@@ -2,13 +2,14 @@ import React from 'react'
 import './Tools.css'
 
 function Tools(props) {
+    const { onAction } = props
     const onlyChild = React.Children.only(props.children)
     const childrencount = React.Children.count(onlyChild.props.children)
     return (
 
-        <div className="list-tools"> 
+        <div className="list-tools">
             <div className="list-header">
-                <select name="status">
+                <select onChange={onAction} name="status">
                     <option value="all">All</option>
                     <option value="active">Active</option>
                     <option value="non-active">Non Active</option>

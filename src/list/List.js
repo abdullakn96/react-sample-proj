@@ -27,32 +27,56 @@ const itemObj = [
 function List() {
 
     const [itemArray, setItemArray] = useState(itemObj)
+    const [activeDropDown, setActiveDropDown] = useState('all')
 
     const handleChangeDropDown = (event) => {
         console.log("dropdown changed")
         console.log(event.target.value)
         const eventValue = event.target.value
-        const newList = itemObj.filter((item) => {
-            if (eventValue === 'all') {
-                return true
-            }
-            if (eventValue === 'active') {
-                return item.isActive === true
-            }
-            if (eventValue === 'non-active') {
-                return item.isActive === false
-            }
-            return false
+        // const newList = itemObj.filter((item) => {
+        //     if (eventValue === 'all') {
+        //         return true
+        //     }
+        //     if (eventValue === 'active') {
+        //         return item.isActive === true
+        //     }
+        //     if (eventValue === 'non-active') {
+        //         return item.isActive === false
+        //     }
+        //     return false
 
-        })
+        // })
 
-        setItemArray(newList)
+        setActiveDropDown(eventValue)
+
+
     }
+
+
+    const newList = itemArray.filter((item) => {
+        if (activeDropDown === 'all') {
+            return true
+        }
+        if (activeDropDown === 'active') {
+            return item.isActive === true
+        }
+        if (activeDropDown === 'non-active') {
+            return item.isActive === false
+        }
+        return false
+
+    })
+
+
+
     return (
+
+
+
         <Tools onAction={handleChangeDropDown}>
             <div className="app-list">
                 {
-                    itemArray.map((obj, index) => {
+                    newList.map((obj, index) => {
                         return <ListItem key={index} title={obj.title} descr={obj.descr} isActive={obj.isActive} />
                     })
                 }

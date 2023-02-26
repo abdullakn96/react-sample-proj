@@ -2,23 +2,22 @@ import React from 'react'
 import Label from './Label'
 import './ListItem.css';
 
-function ListItem() {
+function ListItem(props) {
+  const { title, descr, isActive } = props
   return (
     <div className="list-item">
-     
-        <div className="list-title">
-            <h4>My Title One</h4>
-        </div>
-        <div className="list-descr">
-            This is Description
-        </div>
-        <div className="list-label">
-            <Label/>
-            <Label/>
-            <Label/>
-            
-        </div>
-       
+
+      <div className="list-title">
+        <h4>{title}</h4>
+      </div>
+      <div className="list-descr">
+        {descr}
+      </div>
+      <div className="list-label">
+        <Label onAction={()=>{console.log("this function passed from parent ListItem")}} isActive={isActive} />
+
+      </div>
+
     </div>
   )
 }

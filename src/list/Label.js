@@ -2,10 +2,11 @@ import React from 'react'
 
 import './Label.css'
 
-function Label() {
+function Label(props) {
+    const customStyle = props.isActive ? { background: 'green' } : { background: 'orange' }
     return (
 
-        <span className="list-label-item">Label 1ww</span>
+        <span onClick={()=>{props.onAction()}} className="list-label-item" style={customStyle}>{props.sActive?'Active':'Non Active'}</span>
 
     )
 }

@@ -3,7 +3,7 @@ import Label from './Label'
 import './ListItem.css';
 
 function ListItem(props) {
-  const { title, descr, isActive,onDelete} = props
+  const { title, descr, isActive,onDelete,onLabelClick} = props
   return (
     <div className="list-item">
 
@@ -15,7 +15,7 @@ function ListItem(props) {
         {descr}
       </div>
       <div className="list-label">
-        <Label onAction={()=>{console.log("this function passed from parent ListItem")}} isActive={isActive} />
+        <Label onLabelClick={onLabelClick} isActive={isActive} />
 
       </div>
 

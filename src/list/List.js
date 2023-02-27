@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
 import Tools from '../components/Tools'
-import ListItem from './ListItem'
+import SimpleList from './SimpleList'
 
 
 const itemObj = [
     {
-        'id':1,
+        'id': 1,
         'title': "Title of List Item 1",
         'descr': "Description of List Item 2",
         'isActive': true
     },
     {
-        'id':2,
+        'id': 2,
         'title': "Title of List Item 2",
         'descr': "Description of List Item 2",
         'isActive': false
     },
     {
-        'id':3,
+        'id': 3,
         'title': "Title of List Item 3",
         'descr': "Description of List Item 3",
         'isActive': false
@@ -43,15 +43,32 @@ function List() {
     }
 
 
-    const listHandleDelete=((obj)=>{
+    const listDeleteHandle = ((selectedItem) => {
         console.log("handle delete")
-        console.log(obj)
-        const newList=itemArray.filter((item)=>{
-             return item.id!==obj.id
+
+        const newList = itemArray.filter((item) => {
+            return item.id !== selectedItem.id
         })
 
         setItemArray(newList)
     })
+
+
+    const addItemInList = (newData) => {
+        const newArray=[...itemArray,newData]
+        setItemArray(newArray)
+
+    }
+
+
+    const onLabelClick = (clickedArg) => {
+        setActiveDropDown(clickedArg)
+
+
+    }
+
+    console.log("new item")
+    console.log(itemArray)
 
 
     const newList = itemArray.filter((item) => {
@@ -68,21 +85,11 @@ function List() {
 
     })
 
-
-
     return (
 
+        <Tools labelValue={activeDropDown} onAction={handleChangeDropDown} onAddFunc={addItemInList}>
+            <SimpleList data={newList} onDelete={listDeleteHandle} onLabelClick={onLabelClick} />
 
-
-        <Tools onAction={handleChangeDropDown}>
-            <div className="app-list">
-                {
-                    newList.map((obj, index) => {
-                        return <ListItem key={index} onDelete={()=>{listHandleDelete(obj)}} title={obj.title} descr={obj.descr} isActive={obj.isActive} />
-                    })
-                }
-
-            </div>
         </Tools>
     )
 }

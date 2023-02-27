@@ -4,9 +4,10 @@ import './Label.css'
 
 function Label(props) {
     const customStyle = props.isActive ? { background: 'green' } : { background: 'orange' }
+    const labelValue=props.isActive?'active':'non-active'
     return (
 
-        <span onClick={()=>{props.onAction()}} className="list-label-item" style={customStyle}>{props.sActive?'Active':'Non Active'}</span>
+        <span onClick={()=>{props.onLabelClick(labelValue)}} className = "list-label-item" style = { customStyle } >{labelValue}</span >
 
     )
 }

@@ -1,36 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Tools from '../components/Tools'
 import SimpleList from './SimpleList'
-
-
-const itemObj = [
-    {
-        'id': 1,
-        'title': "Title of List Item 1",
-        'descr': "Description of List Item 2",
-        'isActive': true
-    },
-    {
-        'id': 2,
-        'title': "Title of List Item 2",
-        'descr': "Description of List Item 2",
-        'isActive': false
-    },
-    {
-        'id': 3,
-        'title': "Title of List Item 3",
-        'descr': "Description of List Item 3",
-        'isActive': false
-    }
-]
-
 
 
 
 function List() {
 
-    const [itemArray, setItemArray] = useState(itemObj)
+    const [itemArray, setItemArray] = useState([])
     const [activeDropDown, setActiveDropDown] = useState('all')
+
+
+    useEffect(() => {
+        fetch('/data.json')
+          .then(response => response.json())
+          .then(data => setItemArray(data))
+          .catch(error => console.error(error));
+      }, []);
 
     const handleChangeDropDown = (event) => {
         console.log("dropdown changed")
@@ -55,7 +40,7 @@ function List() {
 
 
     const addItemInList = (newData) => {
-        const newArray=[...itemArray,newData]
+        const newArray = [...itemArray, newData]
         setItemArray(newArray)
 
     }
@@ -67,8 +52,6 @@ function List() {
 
     }
 
-    console.log("new item")
-    console.log(itemArray)
 
 
     const newList = itemArray.filter((item) => {
@@ -87,7 +70,7 @@ function List() {
 
     return (
 
-        <Tools labelValue={activeDropDown} onAction={handleChangeDropDown} onAddFunc={addItemInList}>
+        <Tools labelValue={activeDropDown} onAction={handleChangeDropDown} onAddFunc={addItemInList} count={newList.length}>
             <SimpleList data={newList} onDelete={listDeleteHandle} onLabelClick={onLabelClick} />
 
         </Tools>

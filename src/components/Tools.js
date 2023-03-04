@@ -4,7 +4,7 @@ import './Tools.css'
 
 
 function Tools(props) {
-    const { onAction, labelValue, onAddFunc ,count} = props
+    const { onAction, labelValue, onAddFunc ,handleRefresh,count} = props
   
 
 
@@ -21,6 +21,8 @@ function Tools(props) {
                     <option value="active">Active</option>
                     <option value="non-active">Non Active</option>
                 </select>
+
+                <button className="refresh-button" onClick={handleRefresh}> Refresh</button>
                 <AddNew onAddFunc={onAddFunc} />
 
             </div>

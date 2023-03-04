@@ -2,27 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
-import './components/Header.css'
-import List from './list/List';
+
+import MyApp from './MyApp';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <div className="app">
-    <Header/>
-    
-    <div className="app-body">
-      <List/>
-      
-
-    </div>
-
-    <Footer/>
-   
-
-  </div>
+  <MyApp/>
+  
 );
 
 // If you want to start measuring performance in your app, pass a function

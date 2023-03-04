@@ -10,16 +10,32 @@ function List() {
     const [activeDropDown, setActiveDropDown] = useState('all')
 
 
+
+
     useEffect(() => {
         fetch('/data.json')
-          .then(response => response.json())
-          .then(data => setItemArray(data))
-          .catch(error => console.error(error));
-      }, []);
+            .then(response => response.json())
+            .then(data => setItemArray(data))
+            .catch(error => console.error(error));
+    }, []);
+
+
+
+    const handleRefresh = () => {
+
+        let endpoint = "/data2.json"
+
+        fetch(endpoint)
+            .then(response => response.json())
+            .then(data => setItemArray(data))
+            .catch(error => console.error(error));
+
+
+    }
+
 
     const handleChangeDropDown = (event) => {
         console.log("dropdown changed")
-        console.log(event.target.value)
         const eventValue = event.target.value
 
         setActiveDropDown(eventValue)
@@ -70,7 +86,7 @@ function List() {
 
     return (
 
-        <Tools labelValue={activeDropDown} onAction={handleChangeDropDown} onAddFunc={addItemInList} count={newList.length}>
+        <Tools labelValue={activeDropDown} onAction={handleChangeDropDown} onAddFunc={addItemInList} handleRefresh={handleRefresh} count={newList.length}>
             <SimpleList data={newList} onDelete={listDeleteHandle} onLabelClick={onLabelClick} />
 
         </Tools>
